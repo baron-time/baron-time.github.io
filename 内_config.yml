@@ -203,11 +203,11 @@ disqus:
 ####   See https://github.com/gitalk/gitalk/issues/125
 #   js: https://cdn.jsdelivr.net/gh/upupming/gitalk@36368e5dffd049e956cdbbd751ff96c28d8255cf/dist/gitalk.min.js
 
-# valine comment system. https://valine.js.org
-valine:
+# valine comment system. https: //valine.js.org
+valine: 
   enable: true # if you want use valine,please set this value is true
-  appId:   t2Je5sVDw3xyUdJFX5Gp6bru-gzGzoHsz
-  appKey:   Q9xLDvLB997Fm1M3WAISYJAm
+  appId:   yvRaYHSvYXsKjDUQLfys0mtQ-MdYXbMMI
+  appKey:   qBfIgUNTrSKsTq7VtRcaXCMr
   notify: false # valine mail notify (true/false) https://github.com/xCss/Valine/wiki
   verify: false # valine verify code (true/false)
   pageSize: 10 # comment list page size
@@ -221,11 +221,11 @@ valine:
 since: 2018
 
 footer_custom_text:
-
+ 
 footer_copyright:
   enable: true
 
-ICP:
+ICP: 
   enable: false
   url:
   text:
@@ -243,7 +243,7 @@ bing_site_verification:
 # Baidu Webmaster tools verification setting
 # See: https://ziyuan.baidu.com/site/
 baidu_site_verification:
-
+  
 # 360 Webmaster tools verification setting
 # see http://zhanzhang.so.com/
 qihu_site_verification:
