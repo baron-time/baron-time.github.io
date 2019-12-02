@@ -97,6 +97,11 @@ live2d:
     position: left
     width: 300
     height: 600
+    vOffset: -110
+    hOffset: -80
   mobile:
-    show: false
+    show: true
     scale: 0.5 # 移动设备上的缩放
+  dialog:
+    enable: false
+    hitokoto: false
