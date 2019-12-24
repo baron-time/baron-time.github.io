@@ -148,9 +148,37 @@ highlight_copy: true
  var len = $('#go1 div').length
  // 动态计算轮播图的宽度
  $(document).ready(function() {
-     $('#list #go1').css({
-         'width': len * 480
-     })
+    $.ajax({
+            type: "get",
+            url: "https://www.apiopen.top/satinApi?type=1&page=1",
+            dataType: 'json',
+            success: function (response) {
+              if (response.code == 200) {
+                  // 动态计算轮播图的宽度
+                  var data = response.data
+                  for (var i in data) {
+                      len = data.length
+                      if (len == 1) {
+                          $('.right').hide();
+                          $('.left').hide();
+                      }
+                      var str = '';
+                      var cdn_img = data[i].cdn_img
+                      str += '<div><img src="' + cdn_img + '" alt=""></div>'
+                      $('#go1').append(str).css({
+                          'width': len * 480
+                    })
+                }
+            } else {
+                $('.right').hide();
+                $('.left').hide();
+                $('#go1').html('<div>莫得东西</div>')
+            }
+        }
+    });
+    $('#list #go1').css({
+        'width': len * 480
+    })
  })
  // 轮播图的右按钮点击
  var i = 0;
