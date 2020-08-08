@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>下拉加载更多支持pc和移动 | 郑瑜环的博客</title><meta name="description" content="这个例子中使用了公共的接口 各位可以用这个接口 但是不可以恶意刷数据哦 恶意刷数据时间长了此接口会禁用的 好了话不多说 上菜~jQuery下拉加载更多 支持pc和移动html部分1因为有接口就结构都是动态渲染出来的 所以body以内没有结构标签 各位用的时候按自己的实际情况活用哦  css部分12345678910111213141516171819div &amp;#123;    width: 300"><meta name="author" content="落魄的前端开发"><meta name="copyright" content="落魄的前端开发"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/hr.ico"><link rel="canonical" href="http://yoursite.com/2019/09/06/The-drop-down/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="下拉加载更多支持pc和移动"><meta property="og:url" content="http://yoursite.com/2019/09/06/The-drop-down/"><meta property="og:site_name" content="郑瑜环的博客"><meta property="og:description" content="这个例子中使用了公共的接口 各位可以用这个接口 但是不可以恶意刷数据哦 恶意刷数据时间长了此接口会禁用的 好了话不多说 上菜~jQuery下拉加载更多 支持pc和移动html部分1因为有接口就结构都是动态渲染出来的 所以body以内没有结构标签 各位用的时候按自己的实际情况活用哦  css部分12345678910111213141516171819div &amp;#123;    width: 300"><meta property="og:image" content="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3965973857,1348575134&amp;fm=26&amp;gp=0.jpg"><meta property="article:published_time" content="2019-09-06T08:02:46.000Z"><meta property="article:modified_time" content="2020-07-29T09:07:30.442Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-07-29 17:07:30'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 5.0.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1035770661,3542450860&amp;fm=26&amp;gp=0.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">7</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fa fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-heart"></i><span> 程序员的真实写照</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://zhengyuhuan.xyz/zyhvuePress"><i class="fa-fw fa fa-link"></i><span> vuepress</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%99%E4%B8%AA%E4%BE%8B%E5%AD%90%E4%B8%AD%E4%BD%BF%E7%94%A8%E4%BA%86%E5%85%AC%E5%85%B1%E7%9A%84%E6%8E%A5%E5%8F%A3-%E5%90%84%E4%BD%8D%E5%8F%AF%E4%BB%A5%E7%94%A8%E8%BF%99%E4%B8%AA%E6%8E%A5%E5%8F%A3-%E4%BD%86%E6%98%AF%E4%B8%8D%E5%8F%AF%E4%BB%A5%E6%81%B6%E6%84%8F%E5%88%B7%E6%95%B0%E6%8D%AE%E5%93%A6-%E6%81%B6%E6%84%8F%E5%88%B7%E6%95%B0%E6%8D%AE%E6%97%B6%E9%97%B4%E9%95%BF%E4%BA%86%E6%AD%A4%E6%8E%A5%E5%8F%A3%E4%BC%9A%E7%A6%81%E7%94%A8%E7%9A%84-%E5%A5%BD%E4%BA%86%E8%AF%9D%E4%B8%8D%E5%A4%9A%E8%AF%B4-%E4%B8%8A%E8%8F%9C"><span class="toc-number">1.</span> <span class="toc-text">这个例子中使用了公共的接口 各位可以用这个接口 但是不可以恶意刷数据哦 恶意刷数据时间长了此接口会禁用的 好了话不多说 上菜~</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#jQuery%E4%B8%8B%E6%8B%89%E5%8A%A0%E8%BD%BD%E6%9B%B4%E5%A4%9A-%E6%94%AF%E6%8C%81pc%E5%92%8C%E7%A7%BB%E5%8A%A8"><span class="toc-number">1.1.</span> <span class="toc-text">jQuery下拉加载更多 支持pc和移动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#html%E9%83%A8%E5%88%86"><span class="toc-number">1.1.1.</span> <span class="toc-text">html部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E9%83%A8%E5%88%86"><span class="toc-number">1.1.2.</span> <span class="toc-text">css部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js%E9%83%A8%E5%88%86"><span class="toc-number">1.1.3.</span> <span class="toc-text">js部分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E5%9B%BE"><span class="toc-number">1.2.</span> <span class="toc-text">效果图</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A4%E4%BB%A3%E7%A0%81%E9%9C%80%E8%A6%81jq2-2-0%E4%BB%A5%E4%B8%8A%E7%89%88%E6%9C%AC%E6%89%8D%E5%8F%AF%E4%BB%A5%E8%BF%90%E8%A1%8C"><span class="toc-number">2.</span> <span class="toc-text">此代码需要jq2.2.0以上版本才可以运行</span></a></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3965973857,1348575134&amp;fm=26&amp;gp=0.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">郑瑜环的博客</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fa fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-heart"></i><span> 程序员的真实写照</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://zhengyuhuan.xyz/zyhvuePress"><i class="fa-fw fa fa-link"></i><span> vuepress</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">下拉加载更多支持pc和移动</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2019-09-06T08:02:46.000Z" title="Created 2019-09-06 16:02:46">2019-09-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2020-07-29T09:07:30.442Z" title="Updated 2020-07-29 17:07:30">2020-07-29</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">Comments:</span><a href="/2019/09/06/The-drop-down/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count comment-count" data-xid="/2019/09/06/The-drop-down/" itemprop="commentCount"></span></a></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="这个例子中使用了公共的接口-各位可以用这个接口-但是不可以恶意刷数据哦-恶意刷数据时间长了此接口会禁用的-好了话不多说-上菜"><a href="#这个例子中使用了公共的接口-各位可以用这个接口-但是不可以恶意刷数据哦-恶意刷数据时间长了此接口会禁用的-好了话不多说-上菜" class="headerlink" title="这个例子中使用了公共的接口 各位可以用这个接口 但是不可以恶意刷数据哦 恶意刷数据时间长了此接口会禁用的 好了话不多说 上菜~"></a>这个例子中使用了公共的接口 各位可以用这个接口 但是不可以恶意刷数据哦 恶意刷数据时间长了此接口会禁用的 好了话不多说 上菜~</h1><h2 id="jQuery下拉加载更多-支持pc和移动"><a href="#jQuery下拉加载更多-支持pc和移动" class="headerlink" title="jQuery下拉加载更多 支持pc和移动"></a>jQuery下拉加载更多 支持pc和移动</h2><h3 id="html部分"><a href="#html部分" class="headerlink" title="html部分"></a>html部分</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">因为有接口就结构都是动态渲染出来的 所以body以内没有结构标签 各位用的时候按自己的实际情况活用哦</span><br></pre></td></tr></table></figure>
+
+<h3 id="css部分"><a href="#css部分" class="headerlink" title="css部分"></a>css部分</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">    width: 300px;</span><br><span class="line">    height: 200px;</span><br><span class="line">    margin: 0 auto;</span><br><span class="line">&#125;</span><br><span class="line">.dn &#123;</span><br><span class="line">    display: none;</span><br><span class="line">&#125;</span><br><span class="line">div img &#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">#loading,</span><br><span class="line">#over &#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 30px;</span><br><span class="line">    background-color: pink;</span><br><span class="line">    text-align: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="js部分"><a href="#js部分" class="headerlink" title="js部分"></a>js部分</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">$(document).ready(function () &#123;</span><br><span class="line">       $.ajax(&#123;</span><br><span class="line">           type: &quot;get&quot;,</span><br><span class="line">           url: &quot;https:&#x2F;&#x2F;www.apiopen.top&#x2F;satinApi?type&#x3D;1&amp;page&#x3D;1&quot;,</span><br><span class="line">           dataType: &#39;json&#39;,</span><br><span class="line">           success: function (response) &#123;</span><br><span class="line">               if (response.code &#x3D;&#x3D; 200) &#123;</span><br><span class="line">                   console.log(&#39;%c第\t1\t次\t数\t据\t请\t求\t成\t功&#39;, &#39;color:red;font-size: 20px;&#39;);</span><br><span class="line">                   var data &#x3D; response.data</span><br><span class="line">                   for (var i in data) &#123;</span><br><span class="line">                       var str &#x3D; &#39;&#39;;</span><br><span class="line">                       var cdn_img &#x3D; data[i].cdn_img</span><br><span class="line">                       str +&#x3D; &#39;&lt;div&gt;&lt;img src&#x3D;&quot;&#39; + cdn_img + &#39;&quot; alt&#x3D;&quot;&quot;&gt;&lt;&#x2F;div&gt;&#39;</span><br><span class="line">                       $(&#39;body&#39;).append(str)</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">   &#125;)</span><br><span class="line">   &#x2F;&#x2F; 这是从第二页开始下拉更多</span><br><span class="line">   var pager &#x3D; 1;</span><br><span class="line">   var stop &#x3D; true;</span><br><span class="line">   $(window).scroll(function () &#123;</span><br><span class="line">       if ($(this).scrollTop() + $(window).height() + 100 &gt;&#x3D; $(document).height() &amp;&amp; $(this).scrollTop() +</span><br><span class="line">           100) &#123;</span><br><span class="line">           if (stop &#x3D;&#x3D; true) &#123;</span><br><span class="line">               stop &#x3D; false;</span><br><span class="line">               pager &#x3D; pager + 1;</span><br><span class="line">               $.ajax(&#123;</span><br><span class="line">                   type: &quot;get&quot;,</span><br><span class="line">                   url: &quot;https:&#x2F;&#x2F;www.apiopen.top&#x2F;satinApi?type&#x3D;1&amp;page&#x3D;&quot; + pager,</span><br><span class="line">                   dataType: &#39;json&#39;,</span><br><span class="line">                   success: function (response) &#123;</span><br><span class="line">                       if (response.code &#x3D;&#x3D; 200) &#123;</span><br><span class="line">                           console.log(&#39;%c第\t&#39; + pager + &#39;\t次\t数\t据\t请\t求\t成\t功&#39;,&#39;color:red;font-size: 20px;&#39;);</span><br><span class="line">                           var data &#x3D; response.data</span><br><span class="line">                           for (var i in data) &#123;</span><br><span class="line">                               var str &#x3D; &#39;&#39;;</span><br><span class="line">                               var cdn_img &#x3D; data[i].cdn_img</span><br><span class="line">                               str +&#x3D; &#39;&lt;div&gt;&lt;img src&#x3D;&quot;&#39; + cdn_img + &#39;&quot; alt&#x3D;&quot;&quot;&gt;&lt;&#x2F;div&gt;&#39;</span><br><span class="line">                               $(&#39;body&#39;).append(str)</span><br><span class="line">                               $(&#39;#loading&#39;).remove()</span><br><span class="line">                           &#125;</span><br><span class="line">                           $(&#39;body&#39;).append(&#39;&lt;div id&#x3D;&quot;loading&quot;&gt;加载中......&lt;&#x2F;div&gt;&#39;)</span><br><span class="line">                           stop &#x3D; true;</span><br><span class="line">                       &#125; else &#123;</span><br><span class="line">                           console.log(&#39;%c数\t据\t请\t求\t失\t败&#39;, &#39;color:red;font-size: 20px;&#39;);</span><br><span class="line">                           $(&#39;body&#39;).append(&#39;&lt;div id&#x3D;&quot;over&quot;&gt;淦！~没有数据&lt;&#x2F;div&gt;&#39;)</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src= "/img/loading.gif" data-lazy-src="/img/bottom.gif"><br>如果有数据就会拉一下 出现一下加载中 然后出现下一组内容 如果没有数就显示没有数据 也可以f12控制台看</p>
+<h1 id="此代码需要jq2-2-0以上版本才可以运行"><a href="#此代码需要jq2-2-0以上版本才可以运行" class="headerlink" title="此代码需要jq2.2.0以上版本才可以运行"></a>此代码需要jq2.2.0以上版本才可以运行</h1></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">落魄的前端开发</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/09/06/The-drop-down/">http://yoursite.com/2019/09/06/The-drop-down/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3965973857,1348575134&amp;fm=26&amp;gp=0.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/09/09/size/"><img class="prev-cover" data-lazy-src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1919037390,2349900337&amp;fm=26&amp;gp=0.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">用js实现rem</div></div></a></div><div class="next-post pull-right"><a href="/2019/09/06/table/"><img class="next-cover" data-lazy-src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1567745585834&amp;di=862a4bd311672c3c920e2661a53723f8&amp;imgtype=0&amp;src=http%3A%2F%2Fimg.365azw.com%2FAttachments%2Fshare%2F201703%2F58d48a40ef15d.jpg%2521article.w.p" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">jquery模拟实现删除，查询，全选，反选</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By 落魄的前端开发</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="Increase Font Size"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="Decrease Font Size"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    window.valine = new Valine({
+      el: '#vcomment',
+      appId: 't2Je5sVDw3xyUdJFX5Gp6bru-gzGzoHsz',
+      appKey: 'Q9xLDvLB997Fm1M3WAISYJAm',
+      placeholder: '连续输入文字，让你感受机枪哒哒哒哒的感觉(｡・`ω´･)',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    });
+    if ('nick,mail') { valine.config.requiredFields= 'nick,mail'.split(',') }
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks"></canvas><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/js/third-party/fireworks.js"></script><script defer="defer" id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="true"></script><script defer="defer" id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/chitose.model.json"},"display":{"position":"left","width":300,"height":600,"vOffset":-110,"hOffset":-80},"mobile":{"show":true,"scale":0.5},"dialog":{"enable":false,"hitokoto":false},"log":false});</script></body></html>
